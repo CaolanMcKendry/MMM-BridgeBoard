@@ -23,5 +23,5 @@
   "homepage": "https://github.com/CaolanMcKendry/MMM-BridgeBoard#readme",
   "dependencies": {
     "python-shell": "latest"
-    }
+  }
 }
