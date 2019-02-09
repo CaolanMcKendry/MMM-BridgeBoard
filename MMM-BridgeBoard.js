@@ -21,4 +21,10 @@
  		wrapper.innerHTML = this.config.text;
  		return wrapper;
  	}
+
+	socketNotificationReceived: function(notification, payload) {
+		if(notification === 'text yeho') {
+			this.config.text = 'success'
+		};
+	}
  });
