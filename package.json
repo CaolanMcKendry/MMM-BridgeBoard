@@ -1,0 +1,27 @@
+{
+  "name": "Magic-Mirror-Module-BridgeBoard",
+  "version": "0.9.0",
+  "description": "Wii Fit Smart Scales Module for MagicMirror",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaolanMcKendry/MMM-BridgeBoard"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "smart scales",
+    "health",
+    "weight tracking",
+    "module"
+  ],
+  "author": "Caolan McKendry",
+  "contributors": "https://github.com/CaolanMcKendry/MMM-BridgeBoard/graphs/contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CaolanMcKendry/MMM-BridgeBoard/issues"
+  },
+  "homepage": "https://github.com/CaolanMcKendry/MMM-BridgeBoard#readme",
+  "dependencies": {
+    "python-shell": "latest"
+    }
+}
