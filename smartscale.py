@@ -314,11 +314,11 @@ def main():
     board.setLight(True)
     board.receive()
 
-    adjusted_weight = processor.weight + 3
+    adjusted_weight = processor.weight + 0
     print adjusted_weight
 
-    maker_url = 'https://maker.ifttt.com/trigger/weight/with/key/bl-pS2cU05t_uwy6awIgD8'
-    discord_url = 'https://discordapp.com/api/webhooks/537054784566460457/81ZhWgoTLrDhqaQh4rgNAv1DYFrWyGM771nhRkJDvx9G5DrqWz5NQaHHm-4J0rDsC4NF'
+    maker_url = 'https://maker.ifttt.com/use/bxm6e3kxylVa_g3Wiuwlg9'
+    discord_url = 'https://discordapp.com/api/webhooks/709001300070629467/YDHtSu6uQcfO-RZpElOE8-HozG_EwNTvFJt3xPYWs8y8nxA_ibWMN13X-7QveXKpix04'
     maker_data = {"value1":"%s" % adjusted_weight}
     discord_data = {'content': ('Congratulations you Fat Fuck you weigh %s kg' % adjusted_weight)}
 
