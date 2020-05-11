@@ -288,48 +288,49 @@ class Wiiboard:
 
 # DO NOT EVEN BREATHE NEAR THIS BIT YOU FUCKING DUMB IDIOT
 def main():
-    processor = EventProcessor()
+    while 1==1:
+        processor = EventProcessor()
 
-    board = Wiiboard(processor)
-    if len(sys.argv) == 1:
-        print("Discovering board...")
-        address = board.discover()
-    else:
-        address = sys.argv[1]
+        board = Wiiboard(processor)
+        if len(sys.argv) == 1:
+            print("Discovering board...")
+            address = board.discover()
+        else:
+            address = sys.argv[1]
 
-    try:
-        # Disconnect already-connected devices.
-        # This is basically Linux black magic just to get the thing to work.
-        subprocess.check_output(["bluez-test-input", "disconnect", address], stderr=subprocess.STDOUT)
-        subprocess.check_output(["bluez-test-input", "disconnect", address], stderr=subprocess.STDOUT)
-    except:
-        pass
+        try:
+            # Disconnect already-connected devices.
+            # This is basically Linux black magic just to get the thing to work.
+            subprocess.check_output(["bluez-test-input", "disconnect", address], stderr=subprocess.STDOUT)
+            subprocess.check_output(["bluez-test-input", "disconnect", address], stderr=subprocess.STDOUT)
+        except:
+            pass
 
-    print("Trying to connect...")
-    board.connect(address)  # The wii board must be in sync mode at this time
-    board.wait(200)
-    # Flash the LED so we know we can step on.
-    board.setLight(False)
-    board.wait(500)
-    board.setLight(True)
-    board.receive()
+        print("Trying to connect...")
+        board.connect(address)  # The wii board must be in sync mode at this time
+        board.wait(200)
+        # Flash the LED so we know we can step on.
+        board.setLight(False)
+        board.wait(500)
+        board.setLight(True)
+        board.receive()
 
-    adjusted_weight = processor.weight + 0
-    print(adjusted_weight)
+        adjusted_weight = processor.weight + 0
+        print(adjusted_weight)
 
-    maker_url = 'https://maker.ifttt.com/use/bxm6e3kxylVa_g3Wiuwlg9'
-    discord_url = 'https://discordapp.com/api/webhooks/709001300070629467/YDHtSu6uQcfO-RZpElOE8-HozG_EwNTvFJt3xPYWs8y8nxA_ibWMN13X-7QveXKpix04'
-    maker_data = {"value1":"%s" % adjusted_weight}
-    discord_data = {'content': ('Congratulations you Fat Fuck you weigh %s kg' % adjusted_weight)}
+        maker_url = 'https://maker.ifttt.com/use/bxm6e3kxylVa_g3Wiuwlg9'
+        discord_url = 'https://discordapp.com/api/webhooks/709001300070629467/YDHtSu6uQcfO-RZpElOE8-HozG_EwNTvFJt3xPYWs8y8nxA_ibWMN13X-7QveXKpix04'
+        maker_data = {"value1":"%s" % adjusted_weight}
+        discord_data = {'content': ('Congratulations you Fat Fuck you weigh %s kg' % adjusted_weight)}
 
-    response = requests.post(
-        discord_url, data=json.dumps(discord_data),
-        headers={'Content-Type': 'application/json'}
-    )
-    response = requests.post(
-        maker_url, data=json.dumps(maker_data),
-        headers={'Content-Type': 'application/json'}
-    )
+        response = requests.post(
+            discord_url, data=json.dumps(discord_data),
+            headers={'Content-Type': 'application/json'}
+        )
+        response = requests.post(
+            maker_url, data=json.dumps(maker_data),
+            headers={'Content-Type': 'application/json'}
+        )
 
 if __name__ == "__main__":
     main()
