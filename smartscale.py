@@ -315,7 +315,7 @@ def main():
     board.receive()
 
     adjusted_weight = processor.weight + 0
-    print adjusted_weight
+    print(adjusted_weight)
 
     maker_url = 'https://maker.ifttt.com/use/bxm6e3kxylVa_g3Wiuwlg9'
     discord_url = 'https://discordapp.com/api/webhooks/709001300070629467/YDHtSu6uQcfO-RZpElOE8-HozG_EwNTvFJt3xPYWs8y8nxA_ibWMN13X-7QveXKpix04'
