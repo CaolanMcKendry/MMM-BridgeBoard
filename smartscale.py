@@ -8,6 +8,18 @@ import subprocess
 import json
 import requests
 
+# --------- User Settings ---------
+
+# IFTTT Maker Channel URL
+maker_url = 'https://maker.ifttt.com/use/bxm6e3kxylVa_g3Wiuwlg9'
+
+# Discord Webhook URL
+discord_url = 'https://discordapp.com/api/webhooks/709001300070629467/YDHtSu6uQcfO-RZpElOE8-HozG_EwNTvFJt3xPYWs8y8nxA_ibWMN13X-7QveXKpix04'
+
+# ---------------------------------
+
+maker_data = {"value1":"%s" % adjusted_weight}
+discord_data = {'content': ('Congratulations you Fat Fuck you weigh %s kg' % adjusted_weight)} 
 
 CONTINUOUS_REPORTING = "04"  # Easier as string with leading zero
 
@@ -123,8 +135,6 @@ class Wiiboard:
             print("Could not connect to Wiiboard at address " + address)
 
     def receive(self):
-        #try:
-        #   self.receivesocket.settimeout(0.1)       #not for windows?
         while self.status == "Connected" and not self.processor.done:
             data = self.receivesocket.recv(25)
             intype = int(data.encode("hex")[2:4])
@@ -161,15 +171,13 @@ class Wiiboard:
             pass
         print("WiiBoard disconnected")
 
-
-
     # Try to discover a Wiiboard
     def discover(self):
         address = None
         startTime = time.time()
         while(address == None):
             endTime = time.time()
-            if (endTime - startTime < 1200):
+            if (endTime - startTime < 1500):
                 print("Press the red sync button on the board now")
                 bluetoothdevices = bluetooth.discover_devices(duration=6, lookup_names=True)
                 for bluetoothdevice in bluetoothdevices:
@@ -182,8 +190,6 @@ class Wiiboard:
             else:
                 break
         return address
-
-
 
     def createBoardEvent(self, bytes):
         buttonBytes = bytes[0:2]
@@ -286,7 +292,6 @@ class Wiiboard:
     def wait(self, millis):
         time.sleep(millis / 1000.0)
 
-# DO NOT EVEN BREATHE NEAR THIS BIT YOU FUCKING DUMB IDIOT
 def main():
     while 1==1:
         processor = EventProcessor()
@@ -318,19 +323,17 @@ def main():
         adjusted_weight = processor.weight + 0
         print(adjusted_weight)
 
-        maker_url = 'https://maker.ifttt.com/use/bxm6e3kxylVa_g3Wiuwlg9'
-        discord_url = 'https://discordapp.com/api/webhooks/709001300070629467/YDHtSu6uQcfO-RZpElOE8-HozG_EwNTvFJt3xPYWs8y8nxA_ibWMN13X-7QveXKpix04'
-        maker_data = {"value1":"%s" % adjusted_weight}
-        discord_data = {'content': ('Congratulations you Fat Fuck you weigh %s kg' % adjusted_weight)}
-
-        response = requests.post(
-            discord_url, data=json.dumps(discord_data),
-            headers={'Content-Type': 'application/json'}
-        )
-        response = requests.post(
-            maker_url, data=json.dumps(maker_data),
-            headers={'Content-Type': 'application/json'}
-        )
+        if adjusted_weight > 0:
+            response = requests.post(
+                discord_url, data=json.dumps(discord_data),
+                headers={'Content-Type': 'application/json'}
+            )
+            response = requests.post(
+                maker_url, data=json.dumps(maker_data),
+                headers={'Content-Type': 'application/json'}
+            )
+        else:
+            print("Weight is Zero. No webhook triggered.")
 
 if __name__ == "__main__":
     main()
