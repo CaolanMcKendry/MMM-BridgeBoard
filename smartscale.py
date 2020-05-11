@@ -86,9 +86,9 @@ class Wiiboard:
         self.LED = False
         self.address = None
         self.buttonDown = False
-        for i in xrange(3):
+        for i in range(3):
             self.calibration.append([])
-            for j in xrange(4):
+            for j in range(4):
                 self.calibration[i].append(10000)  # high dummy value so events with it don't register
 
         self.status = "Disconnected"
@@ -239,12 +239,12 @@ class Wiiboard:
     def parseCalibrationResponse(self, bytes):
         index = 0
         if len(bytes) == 16:
-            for i in xrange(2):
-                for j in xrange(4):
+            for i in range(2):
+                for j in range(4):
                     self.calibration[i][j] = (int(bytes[index].encode("hex"), 16) << 8) + int(bytes[index + 1].encode("hex"), 16)
                     index += 2
         elif len(bytes) < 16:
-            for i in xrange(4):
+            for i in range(4):
                 self.calibration[2][i] = (int(bytes[index].encode("hex"), 16) << 8) + int(bytes[index + 1].encode("hex"), 16)
                 index += 2
 
