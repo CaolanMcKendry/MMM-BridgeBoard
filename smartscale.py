@@ -18,9 +18,6 @@ discord_url = 'https://discordapp.com/api/webhooks/709001300070629467/YDHtSu6uQc
 
 # ---------------------------------
 
-maker_data = {"value1":"%s" % adjusted_weight}
-discord_data = {'content': ('Congratulations you Fat Fuck you weigh %s kg' % adjusted_weight)} 
-
 CONTINUOUS_REPORTING = "04"  # Easier as string with leading zero
 
 COMMAND_LIGHT = 11
@@ -322,6 +319,9 @@ def main():
 
         adjusted_weight = processor.weight + 0
         print(adjusted_weight)
+
+        maker_data = {"value1":"%s" % adjusted_weight}
+        discord_data = {'content': ('New Weight Logged: %s kg' % adjusted_weight)} 
 
         if adjusted_weight > 0:
             response = requests.post(
