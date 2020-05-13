@@ -317,7 +317,7 @@ def main():
         board.setLight(True)
         board.receive()
 
-        adjusted_weight = processor.weight + 0
+        adjusted_weight = processor.weight + 5
         print(adjusted_weight)
 
         maker_data = {"value1":"%s" % adjusted_weight}
