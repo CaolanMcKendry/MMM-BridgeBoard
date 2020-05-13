@@ -323,7 +323,7 @@ def main():
         maker_data = {"value1":"%s" % adjusted_weight}
         discord_data = {'content': ('New Weight Logged: %s kg' % adjusted_weight)} 
 
-        if adjusted_weight > 0:
+        if adjusted_weight > 30:
             response = requests.post(
                 discord_url, data=json.dumps(discord_data),
                 headers={'Content-Type': 'application/json'}
